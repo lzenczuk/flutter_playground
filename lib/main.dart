@@ -11,10 +11,7 @@ class MyApp extends StatelessWidget {
 
     return new MaterialApp(
       title: 'Flutter Demo',
-      home: new Scaffold(
-        appBar: new AppBar(title: new Text("Hello"),),
-        body: new Center(child: new RandomWords(),),
-      )
+      home: new RandomWords()
     );
   }
 }
@@ -28,10 +25,33 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords>{
+
+  final _suggestions = <WordPair>[];
+
   @override
   Widget build(BuildContext context) {
-    final wordPair = new WordPair.random();
-    return new Text(wordPair.asPascalCase);
+    return new Scaffold(
+      appBar: new AppBar(title: new Text("Randowm word pairs"),),
+      body: _buildSuggestions(),
+    );
+  }
+
+  Widget _buildSuggestions(){
+    return new ListView.builder(itemBuilder: (context, i){
+      if(i.isOdd) return new Divider();
+
+      final index = i ~/ 2;
+      if (index >= _suggestions.length) {
+        _suggestions.addAll(generateWordPairs().take(10));
+      }
+      return _buildRow(_suggestions[index]);
+    });
+  }
+
+  Widget _buildRow(WordPair wordPair){
+    return new ListTile(
+      title: new Text(wordPair.asPascalCase),
+    );
   }
 
 }
