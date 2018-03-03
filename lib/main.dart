@@ -6,11 +6,14 @@ void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final wordPair = new WordPair.random();
+
     return new MaterialApp(
       title: 'Flutter Demo',
       home: new Scaffold(
         appBar: new AppBar(title: new Text("Hello"),),
-        body: new Center(child: new Text("Some text"),),
+        body: new Center(child: new Text(wordPair.asPascalCase),),
       )
     );
   }
