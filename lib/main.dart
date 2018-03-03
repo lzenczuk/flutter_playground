@@ -55,14 +55,23 @@ class RandomWordsState extends State<RandomWords>{
 
     Widget savedIcon;
     if(alreadySaved){
-      savedIcon = new IconButton(icon: new Icon(Icons.favorite), color: Colors.red,);
+      savedIcon = new Icon(Icons.favorite, color: Colors.red,);
     }else{
-      savedIcon = new IconButton(icon: new Icon(Icons.favorite_border));
+      savedIcon = new Icon(Icons.favorite_border);
     }
 
     return new ListTile(
       title: new Text(wordPair.asPascalCase),
       trailing: savedIcon,
+      onTap: (){
+        setState((){
+          if(alreadySaved){
+            _saved.remove(wordPair);
+          }else{
+            _saved.add(wordPair);
+          }
+        });
+      },
     );
   }
 
