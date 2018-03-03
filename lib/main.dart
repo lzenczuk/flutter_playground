@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       home: new Scaffold(
         appBar: new AppBar(title: new Text("Hello"),),
-        floatingActionButton: new IconButton(icon: new Icon(Icons.add), onPressed: (){ print("Add...");}, color: Colors.blue, ),
+        body: new Center(child: new Text("Some text"),),
       )
     );
   }
