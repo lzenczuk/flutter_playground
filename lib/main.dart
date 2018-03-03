@@ -27,6 +27,7 @@ class RandomWords extends StatefulWidget {
 class RandomWordsState extends State<RandomWords>{
 
   final _suggestions = <WordPair>[];
+  final _saved = new Set<WordPair>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +50,19 @@ class RandomWordsState extends State<RandomWords>{
   }
 
   Widget _buildRow(WordPair wordPair){
+
+    final alreadySaved = _saved.contains(wordPair);
+
+    Widget savedIcon;
+    if(alreadySaved){
+      savedIcon = new IconButton(icon: new Icon(Icons.favorite), color: Colors.red,);
+    }else{
+      savedIcon = new IconButton(icon: new Icon(Icons.favorite_border));
+    }
+
     return new ListTile(
       title: new Text(wordPair.asPascalCase),
+      trailing: savedIcon,
     );
   }
 
